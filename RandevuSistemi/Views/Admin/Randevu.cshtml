@@ -1,0 +1,27 @@
+﻿@using RandevuSistemi.Models.Entities
+@model List<Randevu>
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Doktor Adı</th>
+            <th scope="col">Hasta Adı</th>
+            <th scope="col">Randevu Zamanı</th>
+            <th scope="col">Randevuyu Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DoctorAdi</td>
+                <td>@item.UserName</td>
+                <td>@item.RandevuSaati</td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Admin" asp-action="RandevuSil" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

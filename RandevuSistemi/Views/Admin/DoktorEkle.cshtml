@@ -1,0 +1,24 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model List<SelectListItem>
+
+<h2 class="text-center">Doktor Ekleme Sayfası</h2>
+@using (Html.BeginForm("DoktorEkle", "Admin", FormMethod.Post))
+{
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Doktor Adı</label>
+                    <input type="text" class="form-control" id="name" name="Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="animal_type" class="form-label">Bağlı Olacağı Poliklinik</label>
+                    @Html.DropDownList("id", Model, "-- Seçiniz --", new { @class = "form-control" })
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}

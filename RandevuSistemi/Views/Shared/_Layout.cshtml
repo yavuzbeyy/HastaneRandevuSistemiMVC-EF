@@ -1,0 +1,157 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Randevu Sistemi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/RandevuSistemi.styles.css" asp-append-version="true" />
+</head> 
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@localizer["RandevuSistemi"]</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@localizer["Anasayfa"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Poliklinikler">@localizer["Poliklinikler"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Doktorlar">@localizer["Doktorlar"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RandevuAl">@localizer["RandevuAl"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RandevulariGoruntule">@localizer["Randevularim"]</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                en-tr
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('en')">English</a>
+                                <a class="dropdown-item" href="javascript:void(0);" onclick="changeLanguage('tr')">Türkçe</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @User.Identity.Name
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="CikisYap">@localizer["Cikis"]</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @localizer["Uyelik"]
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="UyeOl">@localizer["UyeOl"]</a>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Home" asp-action="GirisYap">@localizer["Giris"]</a>
+                                </div>
+                            }
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer">
+        <div class="container">
+            <strong> SauSerdivan Randevu Sistemi </strong>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<style>
+    /* Navbar */
+    .navbar {
+        background-color: #17a2b8; /* Navbar arka plan rengi */
+    }
+
+    .navbar-brand {
+        color: #000000; /* Navbar marka metni rengi */
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        color: #000000; /* Navbar link metin rengi */
+    }
+
+        /* Hover efekti için */
+        .navbar-nav .nav-item .nav-link:hover {
+            background-color: #bd5d38; /* Hover efekti için arka plan rengi */
+        }
+
+    .nav-item.active {
+        background-color: #bd5d38; /* Aktif sayfa için arka plan rengi */
+        border-radius: 5px;
+    }
+
+    /* Footer */
+    .footer {
+        background-color: #bd5d38; /* Footer arka plan rengi */
+        text-align: center;
+        color: #000000; /* Footer metin rengi */
+    }
+</style>
+
+<script>
+
+    $(function () {
+        var path = window.location.pathname;
+        $('.navbar-nav .nav-link').each(function () {
+            var href = $(this).attr('href');
+            if (path === href || (path.startsWith(href) && href !== '/')) {
+                $(this).closest('.nav-item').addClass('active');
+            }
+        });
+    });
+
+    function changeLanguage(culture) {
+        // Dil değişikliği işlemini sunucuya gönderelim
+        $.ajax({
+            url: '@Url.Action("ChangeLanguage", "Home")',
+            type: 'POST',
+            data: { culture: culture, returnUrl: window.location.href },
+            success: function (result) {
+                // Yönlendirmeyi sunucudan aldığımız sonuca göre yapalım
+                window.location.reload();
+            },
+            error: function () {
+                // Eğer bir hata olursa, varsayılan olarak Anasayfa'ya yönlendirelim
+                window.location.href = '@Url.Action("Index", "Home")';
+            }
+        });
+    }
+</script>

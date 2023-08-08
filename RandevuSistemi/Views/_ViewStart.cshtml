@@ -1,0 +1,13 @@
+﻿@{
+    var actionDescriptor = ViewContext.ActionDescriptor;
+
+    // Eğer Controller "AdminController" ise "_Views_Shared__AdminLayout" layout'unu kullan
+    if (actionDescriptor.RouteValues["controller"] == "Admin")
+    {
+        Layout = "_AdminLayout";
+    }
+    else
+    {
+        Layout = "_Layout"; // Varsayılan layout dosyası
+    }
+}

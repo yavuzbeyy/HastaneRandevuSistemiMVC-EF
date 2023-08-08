@@ -1,0 +1,29 @@
+﻿@model RandevuSistemi.Models.Entities.Doktor
+
+<h2>Çalışma Saati Oluştur - @Model.AdSoyad</h2>
+
+<div> </div>
+
+<form method="post" asp-action="CalismaSaatiOlustur">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label for="calismaZamani" class="mb-2">Çalışma Tarihi ve Saati:</label>
+
+        <div> </div>
+
+        <div> </div>
+
+        <div> </div>
+        <input type="datetime-local" id="calismaZamani" name="CalismaZamani" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+
+        <div> </div>
+
+        <div> </div>
+    </div>
+
+    <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-primary float-end mt-2">Çalışma Saati Oluştur</button>
+</form>
+

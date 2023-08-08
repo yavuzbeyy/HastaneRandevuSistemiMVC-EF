@@ -1,0 +1,30 @@
+﻿@using RandevuSistemi.Models.Dto
+
+<a class="btn btn-primary float-end mb-2 mt-2" asp-area="" asp-controller="Admin" asp-action="AnaBilimDaliEkle">Ana Bilim Dalı Ekle</a>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Ana Bilim Dalları</th>
+            <th scope="col">Düzenle</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
+                    <a class="btn btn-info" asp-area="" asp-controller="Admin" asp-action="AnaBilimDaliDuzenle" asp-route-id="@item.Id">Düzenle</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Admin" asp-action="AnaBilimDaliSil" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

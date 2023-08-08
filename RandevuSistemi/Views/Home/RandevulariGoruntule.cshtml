@@ -1,0 +1,32 @@
+﻿@using RandevuSistemi.Models.Entities
+@model List<Randevu>
+
+<header class="text-center py-4">
+    <h1>Randevularım</h1>
+    <p class="lead"></p>
+</header>
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Doktor Adı</th>
+            <th scope="col">Kullanıcı Adı</th>
+            <th scope="col">Randevu Zamanı</th>
+            <th scope="col">Randevuyu İptal Et</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DoctorAdi</td>
+                <td>@item.UserName</td> 
+                <td>@item.RandevuSaati</td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Home" asp-action="RandevuIptal" asp-route-id="@item.Id">İptal Et</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,62 @@
+﻿@using RandevuSistemi.Models.Entities;
+@model Tuple<List<CalismaSaatleri>, int>
+
+@{
+    ViewData["Title"] = "Randevu Saati Seç";
+}
+
+<script>
+    function selectCard(cardId, cardDate) {
+        var selectedCard = document.querySelector(".card.selected");
+        if (selectedCard) {
+            selectedCard.classList.remove("selected");
+        }
+
+        var card = document.getElementById(cardId);
+        card.classList.add("selected");
+
+        var hiddenInput = document.getElementById("selectedCardId");
+        hiddenInput.value = cardId;
+
+        var dateInput = document.getElementById("selectedCardDate");
+        dateInput.value = cardDate;
+    }
+</script>
+
+<style>
+    .card.selected {
+        background-color: lightblue;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h3>Randevu Saatleri</h3>
+
+        @if (Model == null)
+        {
+            <p>@ViewBag.Mesaj</p>
+        }
+        else
+        {
+            <form asp-action="RandevuOlustur" asp-controller="Home" method="post">
+                <input type="hidden" name="doctorId" value="@Model.Item2" />
+                <input type="hidden" id="selectedCardId" name="selectedCardId" value="" />
+                <input type="hidden" id="selectedCardDate" name="selectedCardDate" value="" />
+
+                @foreach (var calismaSaati in Model.Item1)
+                {
+                    <div id="card_@calismaSaati.Id" class="card mb-3" onclick="selectCard('card_@calismaSaati.Id', '@calismaSaati.CalismaZamani.ToString("yyyy-MM-ddTHH:mm:ss")')">
+                        <div class="card-body">
+                            <h5 class="card-title">@calismaSaati.CalismaZamani.ToString("dd.MM.yyyy HH:mm:ss")</h5>
+                        </div>
+                    </div>
+                }
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Randevu Oluştur</button>
+                </div>
+            </form>
+        }
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@using RandevuSistemi.Models.Entities
+@model List<Hizmetler>
+
+<!-- Button to open modal -->
+<button type="button" class="btn btn-success float-end mb-2 mt-2" data-bs-toggle="modal" data-bs-target="#hizmetEkleModal">Hizmet Ekle</button>
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Hizmet Adı</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.HizmetAdi</td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Admin" asp-action="HizmetSil" asp-route-id="@item.Id">Sil</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="hizmetEkleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yeni Hizmet Ekle</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="Hizmetler" method="post">
+                <div class="modal-body">
+                    <label for="hizmetAdi">Hizmet Adı:</label>
+                    <input type="text" class="form-control" id="hizmetAdi" name="hizmetAdi" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

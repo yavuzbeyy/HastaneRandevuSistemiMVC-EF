@@ -1,0 +1,29 @@
+﻿@using RandevuSistemi.Models.Dto
+@model List<PoliklinikveAnabilimDaliAdi>
+
+<a class="btn btn-primary float-end mb-2 mt-2" asp-area="" asp-controller="Admin" asp-action="PoliklinikEkle">Poliklinik Ekle</a>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Poliklinik</th>
+            <th scope="col">Bağlı Olduğu Ana Bilim Dalı</th>
+            <th scope="col">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.poliklinik.Id</td>
+                <td>@item.poliklinik.Name</td>
+                <td>@item.AnaBilimDaliAdi</td>
+                <td>
+                    <a class="btn btn-danger" asp-area="" asp-controller="Admin" asp-action="PoliklinikSil" asp-route-id="@item.poliklinik.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,57 @@
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer entr
+@using RandevuSistemi.Models.Entities
+@model List<Hizmetler>
+
+@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+<!-- Bootstrap stil verildi -->
+<header class="jumbotron text-center text-blue py-5">
+    <h1 class="display-4">  <strong> @entr["title"]</strong></h1>
+    <p class="lead">@entr["p"]</p>
+</header>
+
+<div class="container py-5">
+    <section id="hakkimizda" style="background-color: #fff0f5; padding: 20px;">
+        <h2 class="text-center">@entr["hakkimizda"]</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
+                <p class="card-text">@entr["card1"]</p>
+                <p class="card-text">@entr["card2"]</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="hizmetler" class="py-5 mt-5" style="background-color: #fff0f5; padding: 20px;">
+        <h2 class="text-center">@entr["Hizmetler"]</h2>
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <a href="#" class="list-group-item list-group-item-action">@item.HizmetAdi</a>
+            }
+        </div>
+    </section>
+
+    <section id="iletisim" class="py-5 mt-5" style="background-color: #fff0f5; padding: 20px;">
+        <h2 class="text-center">@entr["İletisim"]</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">@entr["Adres"]</p>
+                        <p class="card-text">@entr["Telefon"]</p>
+                        <p class="card-text">@entr["Eposta"]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    body {
+        background-color: #fff0f5; /* Arka plan rengi örneği */
+    }
+</style>
